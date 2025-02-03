@@ -1,0 +1,455 @@
+/* WARNING: This whole css is a massive mess. Causes massive headaches just by looking at it. */
+
+/* There are css selectors here that are unused */
+
+/* transitions from https://www.youtube.com/watch?v=4oSZzAOpbOw */
+
+@view-transition {
+    navigation: auto;
+}
+
+@keyframes fade-back {
+    from {
+        opacity: 1;
+        scale: 1;
+    }
+
+    to {
+        opacity: 0.5;
+        scale: 0.8;
+    }
+}
+
+@keyframes slide-in {
+   from {
+        transform: translateX(100%);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+::view-transition-old(root) {
+    animation: 1s cubic-bezier(0.87, 0, 0.13, 1) both fade-back;
+}
+
+::view-transition-new(root) {
+    animation: 1s cubic-bezier(0.87, 0, 0.13, 1) both slide-in;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.night-sky {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to bottom, #050a14 0%, #0c1829 100%);
+    overflow: hidden;
+    min-height: 100vh;
+    height: auto;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 130px 80px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 160px 120px, #ffffff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0.3; }
+}
+
+/* background generated from https://v0.dev/chat */
+
+.fadeIn {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#introText {
+    font-family: 'Georgia', serif;
+    position: absolute;
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-50%, calc(-50% - 70px));
+    color: #ADD8E6;
+}
+
+/*
+    Asked chatgpt to help me create a time-picker that fit with the design I envisioned, as I cannot find any templates or examples
+    that come close to what I had in my mind, and I lack the skills to create it out of thin air. It gave me a bare-bones version,
+    which I still had to modify a fuck ton. This is the closest I could make, but still lacks mobile responsiveness.
+*/
+
+.time-picker {
+
+    position: absolute;
+    left: 50vw; /* 50% of viewport width */
+    top: 50vh; /* 50% of viewport height */
+    transform: translate(-50%, -50%); /* Shift back by half the element's size */
+    z-index: 9999;
+}
+
+.time-picker-dropdown {
+    display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 9999;
+    background: #2d2d2d;
+    border: 1px solid #3d3d3d;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.time-picker-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.time-column {
+    height: 200px;
+    overflow-y: auto;
+    flex: 1;
+    text-align: center;
+    border: 1px solid #3d3d3d;
+    border-radius: 4px;
+    padding: 5px;
+    background: #1a1a1a;
+}
+
+.time-column::-webkit-scrollbar {
+    width: 8px;
+}
+
+.time-column::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+.time-column::-webkit-scrollbar-thumb {
+    background: #4d4d4d;
+    border-radius: 4px;
+}
+
+.time-item {
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    color: #ffffff;
+    transition: all 0.2s;
+}
+
+.time-item:hover {
+    background-color: #3d3d3d;
+}
+
+.time-item.selected {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.ampm-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    padding: 10px 15px !important;
+}
+
+.form-control.time-input {
+    background-color: #2d2d2d;
+    border-color: #3d3d3d;
+    color: #ffffff;
+    text-align: center;
+}
+
+.custom-submit-btn {
+    background-color: #0d6efd;
+    border: 1px solid #0a58ca;
+    font-size: 1.1rem;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: absolute;
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-50%, calc(-50% + 60px));
+    z-index: 1;
+    min-width: 200px;
+    padding: 12px 30px !important;
+}
+
+.custom-submit-btn:hover {
+    background-color: #0b5ed7;
+    transform: translate(-50%, calc(-50% + 60px)) translateY(-2px);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }
+
+.content {
+    position: relative;
+    z-index: 1000;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20vh;
+    padding: 20px 0;
+}
+
+.home-content {
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    color: #ffffff;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: -5%;
+    left: -300px;
+    top: -100px;
+    position: relative;
+    transform: translate(50%, calc(10% + 0px))
+}
+
+.content-wrapper {
+    max-width: 600px;
+    width: 100%;
+}
+
+.text-content {
+    width: 100%;
+}
+
+#wake-up-time {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.highlight {
+    color: #64ffda;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+#optimal-sleep-time {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: #CCCCCC
+}
+
+.optimal, .secondary-optimal {
+    font-size: 20px;
+}
+
+.highlight-bold {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: #ADD8E6;
+    font-weight: 1000
+}
+
+.divider {
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
+    color: #888;
+}
+
+/*
+    For this one, while I had the help of an AI, instead of asking it to code it for me, I asked it for help in the steps instead.
+    Man I'm starting to hate javascript...
+*/
+
+.clock-container {
+    width: 90vw;
+    height: 90vw;
+    max-width: 400px;
+    max-height: 400px;
+    margin: 0 auto;
+    transform: translate(0%, calc(50% + 0px))
+}
+
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    border: 2px solid #3d3d3d;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform-origin: bottom center;
+    background-color: #ffffff;
+    border-radius: 3px;
+    transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.6, 1);
+}
+
+.hour-hand {
+    width: 4px;
+    height: 30%;
+    margin-left: -2px;
+}
+
+.minute-hand {
+    width: 2px;
+    height: 40%;
+    margin-left: -1px;
+    background-color: #64ffda;
+}
+
+.center-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.arrow {
+    width: 15px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    position: absolute;
+    left: 6vw;
+    top: 10vh;
+    color: transparent;
+    font-size: 0;
+    overflow: hidden;
+}
+
+.arrow:hover {
+    border-color: #00ff00;
+    opacity: 0.8;
+}
+
+.left {
+    transform: rotate(135deg) translateY(2px);
+}
+
+.mobile-back-btn {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10000;
+    display: none;
+}
+
+/*
+    Asked ai how I can make my code mobile responsive, turns out I should have designed from a phone's perspective first.
+    And I really really really don't want to redo all this css, my head will burst. Well, not for now, I'll have to revisit it soon,
+    maybe after CS50W?
+*/
+
+@media (max-width: 768px) {
+    #introText {
+        font-size: 1.5rem;
+        transform: translate(-50%, calc(-40% - 80px));
+    }
+
+    .clock-container {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: translate(0%, calc(-50% - 50px));
+        margin: 2rem auto;
+    }
+
+    #optimal-sleep-time {
+        font-size: 1.5rem;
+    }
+
+    .time-option {
+        font-size: 1rem;
+    }
+
+    .custom-submit-btn {
+        width: 90%;
+        left: 50%;
+        transform: translate(-50%, calc(20% + 15px));
+    }
+
+    .home-container {
+        left: 0;
+        top: 0;
+        padding: 1rem;
+        transform: translate(5%, calc(0% + 0px));
+    }
+
+    .mobile-back-btn {
+        display: block;
+    }
+
+    .arrow.left {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .time-column {
+        height: 150px;
+    }
+
+    .time-item {
+        padding: 12px;
+        font-size: 1.1rem;
+        min-height: 40px;
+    }
+}
+
+

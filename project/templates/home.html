@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="home-container fadeIn">
+                <div class="content-wrapper">
+                    <h1 id="wake-up-time">To wake up at <span class="highlight">{{ selected_time }}</span></h1>
+                    <h2 id="optimal-sleep-time">Your optimal time to sleep is:</h2>
+                    <div class="time-options">
+                        <div class="time-option optimal"><span class="highlight-bold">{{optimal_time}}</span> - 7 hours and 30 mins of sleep</div>
+                        <div class="divider">or</div>
+                        <div class="time-option secondary-optimal"><span class="highlight-bold">{{secondary_optimal_time}}</span> - 9 hours of sleep</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clock-container mb-4 fadeIn">
+            <div class="clock-face">
+                <div class="hand hour-hand"></div>
+                <div class="hand minute-hand"></div>
+                <div class="center-dot"></div>
+            </div>
+        </div>
+
+        <form action="/" method="post">
+            <button class="btn btn-lg mobile-back-btn" type="submit">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <button class="arrow left fadeIn" type="submit">back</button>
+        </form>
+
+    </div>
+{% endblock %}
+
+{% block js %}/static/big-clock.js{% endblock %}
